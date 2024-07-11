@@ -1,6 +1,6 @@
 <template>
     <ul class="movie-list list-group">
-        <MovieItem v-for="(movie, index) in movies" :key="index" :movie="movie" />
+        <MovieItem v-for="movie in movies" :key="movie.id" :movie="movie" @onToggle="$emit('onToggle', $event)" @onRemove="$emit('onRemove', movie.id)" />
     </ul>
 </template>
 
@@ -13,9 +13,9 @@
         props: {
             movies: {
                 type: Array,
-                required: true
-            }
-        }
+                required: true,
+            },
+        },
     };
 </script>
 

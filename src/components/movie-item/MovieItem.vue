@@ -1,13 +1,14 @@
 <template>
     <li class="list-group-item d-flex justify-content-between" :class="[{ like: movie.like }, { favorite: movie.favorite }]">
-        <span class="list-gorup-item-label">{{ movie.name }}</span>
+        <span class="list-gorup-item-label" @click="$emit('onToggle', {id: movie.id, action: 'like'})">{{ movie.name }}</span>
         <input type="number" class="list-group-item-input" :defaultValue="movie.viewers" />
-        <div class="d-flex justify-content-content align-items-center">
-            <button type="button" class="btn-cookie btn-sm">
+
+        <div clas s="d-flex justify-content-content align-items-center">
+            <button type="button" class="btn-cookie btn-sm"  @click="$emit('onToggle', {id: movie.id, action: 'favorite'})">
                 <i class="fas fa-cookie"></i>
             </button>
 
-            <button class="btn-trash btn-sm">
+            <button class="btn-trash btn-sm" @click="$emit('onRemove', movie.id)">
                 <i class="fas fa-trash"></i>
             </button>
 
@@ -22,6 +23,13 @@
             movie: {
                 type: Object,
                 required: true,
+            },
+        },
+
+        methods: {
+            onLike() {
+                this.$emit("onLike", this.movie.id)
+                // console.log(this.movie.id);
             },
         },
     };
